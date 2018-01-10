@@ -56,13 +56,13 @@ public:
     // Contrat : aucun
     
 //----------------------------------------------------- Méthodes publiques
-	void AfficherPlusConsultes();
+	void AfficherPlusConsultes() const;
     // Mode d'emploi : Affiche les dix pages du graphes qui ont le plus
     //		liens dans leur direction. L'affichage se fait selon l'ordre
     //		décroissant du nombre de liens.
     // Contrat : Aucun.
     
-	bool Exporter(const string & nomFichier);
+	bool Exporter(const string & nomFichier) const;
     // Mode d'emploi : Si le fichier d'adresse absolue ou relative
     //		nomFichier existe alors il est écrasé, sinon il est créé. Le
     //		Ce même fichier est ensuite remplit du code permettant la

@@ -40,12 +40,12 @@ Graphe::~Graphe ( )
 } //----- Fin de ~Graphe
 
 //----------------------------------------------------- Méthodes publiques
-void Graphe::AfficherPlusConsultes()
+void Graphe::AfficherPlusConsultes() const
 // Algorithme : aucun
 {
 } //----- Fin de AfficherPlusConsultes
 
-bool Graphe::Exporter(const string & nomFichier)
+bool Graphe::Exporter(const string & nomFichier) const
 // Algorithme : aucun
 {
 	return true;
