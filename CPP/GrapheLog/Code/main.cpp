@@ -11,8 +11,9 @@
 *************************************************************************/
 using namespace std;
 #include <iostream>
+#include "Graphe.h"
 
 int main (){
+	Graphe("test.log");
 	return 0;
-	
 }
