@@ -18,5 +18,6 @@ int main (){
 #ifdef TEST_FLO
 	monGraphe.AfficheTEST_FLO();
 #endif
+	monGraphe.Exporter("test.dot");
 	return 0;
 }

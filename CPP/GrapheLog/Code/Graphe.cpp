@@ -193,10 +193,15 @@ bool Graphe::Exporter(const string & nomFichier) const
 		return false;
 	}
 	
-	/*
-	code à faire
-	*/
-	
+	//Exportation
+	fs << "digraph {" << endl;
+	for(auto it = index.begin(); it != index.end(); ++it)
+	{
+		fs << "node" << it->second << " [label=\"" << it->first << "\"];"
+																<< endl;
+		//fs << liensPages[it->second];
+	}
+	fs << "}";
 	fs.close();
 	return true;
 } //----- Fin de Exporter
@@ -209,7 +214,7 @@ void Graphe::AfficheTEST_FLO()
 	for(auto it = index.begin(); it != index.end(); ++it)
 	{
 		LienPage lienPage = liensPages[it->second];
-		cout << it->second << " - " << it->first <<endl;
+		cout << it->second << " - " << it->first << endl;
 		cout << "    NbLiens = " << lienPage.NbLiens << endl;
 		for(auto jt = lienPage.Liens.begin(); jt != lienPage.Liens.end();
 																	++jt)
