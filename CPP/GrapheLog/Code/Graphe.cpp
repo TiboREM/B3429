@@ -148,7 +148,7 @@ Graphe::Graphe (const string & nomFichier, const bool optionE,
 		{
 			ajouterLien(pageArrivee, pageDepart);
 #ifdef TEST_FLO
-			cout << "    Ajout du lien : " << pageArrivee << " -> " <<
+			cout << "    Ajout du lien : " << pageArrivee << " <- " <<
 														pageDepart << endl;
 #endif
 		}
@@ -208,10 +208,14 @@ void Graphe::AfficheTEST_FLO()
 	cout << "---- AFFICHAGE -----" <<endl;
 	for(auto it = index.begin(); it != index.end(); ++it)
 	{
-		unsigned int test = it->second;
-		LienPage lienPage = liensPages[test];
+		LienPage lienPage = liensPages[it->second];
 		cout << it->second << " - " << it->first <<endl;
 		cout << "    NbLiens = " << lienPage.NbLiens << endl;
+		for(auto jt = lienPage.Liens.begin(); jt != lienPage.Liens.end();
+																	++jt)
+		{
+			cout << "        " << jt->first << " x" <<jt->second << endl;
+		}
 	}
 	cout << "--------------------" <<endl;
 } //----- Fin de AfficheTEST_FLO
@@ -229,8 +233,8 @@ void Graphe::ajouterLien(const string & pageArrivee,
 	}
 	
 	unsigned int indexPageArrivee = index[pageArrivee];
-	LienPage lienPage = liensPages[indexPageArrivee];
-	++(lienPage.NbLiens);
+	LienPage * lienPage = &liensPages[indexPageArrivee];
+	++lienPage->NbLiens;
 	
 	if(!pageDepart.empty())
 	{
@@ -240,13 +244,13 @@ void Graphe::ajouterLien(const string & pageArrivee,
 		}
 		unsigned int indexPageDepart = index[pageDepart];
 		
-		if(!lienPage.Liens.count(indexPageDepart))
+		if(!lienPage->Liens.count(indexPageDepart))
 		{
-			lienPage.Liens[indexPageDepart] = 1;
+			lienPage->Liens[indexPageDepart] = 1;
 		}
 		else
 		{
-			++lienPage.Liens[indexPageDepart];
+			++lienPage->Liens[indexPageDepart];
 		}
 	}
 } //----- Fin de ajouterLien
