@@ -172,7 +172,7 @@ void Graphe::AfficherPlusConsultes() const
 	// string : nom de la page
 	multimap<unsigned int, string> classement;
 	
-	cout << "taille : " << index.size() << endl;
+	//cout << "taille : " << index.size() << endl;
 	for(auto &it : index)
 	{
 		string nomPage = it.first;
@@ -181,6 +181,8 @@ void Graphe::AfficherPlusConsultes() const
 		unsigned int nbLiens = 0;//lienPage.NbLiens;
 		
 		//cout << nomPage << " " << nbLiens << "---" << it.second << endl;
+		
+		classement.insert({nbLiens, nomPage});
 
 	}
 	
