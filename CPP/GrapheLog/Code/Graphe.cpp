@@ -148,7 +148,7 @@ Graphe::Graphe (const string & nomFichier, const bool optionE,
 		{
 			ajouterLien(pageArrivee, pageDepart);
 #ifdef TEST_FLO
-			cout << "    Ajout du lien : " << pageArrivee << " -> " <<
+			cout << "    Ajout du lien : " << pageArrivee << " <- " <<
 														pageDepart << endl;
 #endif
 		}
@@ -184,7 +184,7 @@ bool Graphe::Exporter(const string & nomFichier) const
 	
 	//Exportation
 	fstream fs;
-	fs.open(nomFichier, fstream::out | fstream::app);
+	fs.open(nomFichier, fstream::trunc | fstream::out);
 	if(!fs.is_open())
 	{
 		fs.close();
@@ -193,23 +193,37 @@ bool Graphe::Exporter(const string & nomFichier) const
 		return false;
 	}
 	
-	/*
-	code à faire
-	*/
-	
+	//Exportation
+	fs << "digraph {" << endl;
+	for(auto it = index.begin(); it != index.end(); ++it)
+	{
+		fs << "node" << it->second << " [label=\"" << it->first << "\"];"
+																<< endl;
+	}
+	for(auto jt = index.begin(); jt != index.end(); ++jt)
+	{
+		fs << liensPages.at(jt->second);
+	}
+	fs << "}";
 	fs.close();
 	return true;
 } //----- Fin de Exporter
 
 #ifdef TEST_FLO
-void Graphe::AfficheTEST_FLO() const
+void Graphe::AfficheTEST_FLO()
 // Algorithme : aucun
 {
 	cout << "---- AFFICHAGE -----" <<endl;
 	for(auto it = index.begin(); it != index.end(); ++it)
 	{
-		LienPage lienPage = liensPages[it->first];
-		cout << it->second << " - " << it->first <<endl;
+		LienPage lienPage = liensPages[it->second];
+		cout << it->second << " - " << it->first << endl;
+		cout << "    NbLiens = " << lienPage.NbLiens << endl;
+		for(auto jt = lienPage.Liens.begin(); jt != lienPage.Liens.end();
+																	++jt)
+		{
+			cout << "        " << jt->first << " x" <<jt->second << endl;
+		}
 	}
 	cout << "--------------------" <<endl;
 } //----- Fin de AfficheTEST_FLO
@@ -227,8 +241,8 @@ void Graphe::ajouterLien(const string & pageArrivee,
 	}
 	
 	unsigned int indexPageArrivee = index[pageArrivee];
-	LienPage lienPage = liensPages[indexPageArrivee];
-	++(lienPage.NbLiens);
+	LienPage * lienPage = &liensPages[indexPageArrivee];
+	++lienPage->NbLiens;
 	
 	if(!pageDepart.empty())
 	{
@@ -238,13 +252,13 @@ void Graphe::ajouterLien(const string & pageArrivee,
 		}
 		unsigned int indexPageDepart = index[pageDepart];
 		
-		if(!lienPage.Liens.count(indexPageDepart))
+		if(!lienPage->Liens.count(indexPageDepart))
 		{
-			lienPage.Liens[indexPageDepart] = 1;
+			lienPage->Liens[indexPageDepart] = 1;
 		}
 		else
 		{
-			++lienPage.Liens[indexPageDepart];
+			++lienPage->Liens[indexPageDepart];
 		}
 	}
 } //----- Fin de ajouterLien

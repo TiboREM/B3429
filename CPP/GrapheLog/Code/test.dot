@@ -1,0 +1,8 @@
+digraph {
+node3 [label="http://www.google.fr/url?sa=t&rct=j&q=&esrc=s&source=web&cd=2&ved=0CDIQFjAB&url=http%3A%2F%2Fintranet-if.insa-lyon.fr%2Ftemps%2F&ei=_wxLUKCwEMaJhQe08oCYCw&usg=AFQjCNEWrHsRdIlhli_31qYl94w-yMCjpw&sig2=eTdZgqmz8aDAi5eiWxEP1g"];
+node1 [label="http://intranet-if.insa-lyon.fr/temps/4IF15.html"];
+node2 [label="/temps/"];
+node0 [label="/temps/4IF16.html"];
+node3 -> node0 [label="1"]
+node1 -> node0 [label="2"]
+}

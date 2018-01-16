@@ -20,8 +20,34 @@
 //------------------------------------------------------------------ Types
 struct LienPage
 {
+	// ID de la page concernée
+	const unsigned int Id;
+	
+	// Nombre d'accès vers cette page
 	unsigned int NbLiens;
+	
+	
+	// Structure de données contenant les accès vers la page d'id Id.
+	// Premier entier : Id de page de départ
+	// Deuxième entier : nb d'accès
 	unordered_map<unsigned int, unsigned int> Liens;
+	
+	
+	// Surcharge de l'opérateur << pour l'écriture dans le fichier .dot.
+	friend ostream& operator << (ostream& o, const LienPage& lp)
+	{
+		for (pair<unsigned int, unsigned int> element : lp.Liens)
+			o << "node" << element.first << " -> node" << lp.Id 
+				<< " [label=\"" << element.second << "\"]" << endl;
+		return o;
+	}
+	
+	// Constructeur : initialisation du nombre de liens à 0.
+	// i : Id de la page concernée
+	// 
+	LienPage (const unsigned int i) : Id(i), NbLiens(0) {}
+	
+	LienPage() : Id(0), NbLiens(0) {}
 };
 
 //------------------------------------------------------------------------
@@ -71,7 +97,7 @@ public:
     //		d'un fichier .dot.
 
 #ifdef TEST_FLO
-	void AfficheTEST_FLO() const;
+	void AfficheTEST_FLO();
     // Mode d'emploi : Affiche l'objet dans la console.
     // Contrat : Le aucun.
 #endif
