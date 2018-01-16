@@ -184,7 +184,7 @@ bool Graphe::Exporter(const string & nomFichier) const
 	
 	//Exportation
 	fstream fs;
-	fs.open(nomFichier, fstream::out | fstream::app);
+	fs.open(nomFichier, fstream::trunc | fstream::out);
 	if(!fs.is_open())
 	{
 		fs.close();
@@ -199,7 +199,10 @@ bool Graphe::Exporter(const string & nomFichier) const
 	{
 		fs << "node" << it->second << " [label=\"" << it->first << "\"];"
 																<< endl;
-		//fs << liensPages[it->second];
+	}
+	for(auto jt = index.begin(); jt != index.end(); ++jt)
+	{
+		fs << liensPages.at(jt->second);
 	}
 	fs << "}";
 	fs.close();
