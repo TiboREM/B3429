@@ -202,14 +202,16 @@ bool Graphe::Exporter(const string & nomFichier) const
 } //----- Fin de Exporter
 
 #ifdef TEST_FLO
-void Graphe::AfficheTEST_FLO() const
+void Graphe::AfficheTEST_FLO()
 // Algorithme : aucun
 {
 	cout << "---- AFFICHAGE -----" <<endl;
 	for(auto it = index.begin(); it != index.end(); ++it)
 	{
-		LienPage lienPage = liensPages[it->first];
+		unsigned int test = it->second;
+		LienPage lienPage = liensPages[test];
 		cout << it->second << " - " << it->first <<endl;
+		cout << "    NbLiens = " << lienPage.NbLiens << endl;
 	}
 	cout << "--------------------" <<endl;
 } //----- Fin de AfficheTEST_FLO

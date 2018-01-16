@@ -71,7 +71,7 @@ public:
     //		d'un fichier .dot.
 
 #ifdef TEST_FLO
-	void AfficheTEST_FLO() const;
+	void AfficheTEST_FLO();
     // Mode d'emploi : Affiche l'objet dans la console.
     // Contrat : Le aucun.
 #endif
