@@ -17,6 +17,7 @@
 using namespace std;
 #include <iostream>
 #include <fstream>
+#include <map>
 
 //------------------------------------------------------ Include personnel
 #include "Graphe.h"
@@ -174,6 +175,31 @@ Graphe::~Graphe ( )
 void Graphe::AfficherPlusConsultes() const
 // Algorithme : aucun
 {
+	// int : nombre de visites
+	// string : nom de la page
+	multimap<unsigned int, string> classement;
+	
+	cout << "taille : " << index.size() << endl;
+	for(auto &it : index)
+	{
+		string nomPage = it.first;
+		if(liensPages.count(it.second))
+			LienPage lienPage = liensPages.at(it.second);
+		unsigned int nbLiens = 0;//lienPage.NbLiens;
+		
+		//cout << nomPage << " " << nbLiens << "---" << it.second << endl;
+
+	}
+	
+	
+	for(auto it = classement.end();	it != classement.begin(); --it)
+	{
+		// it->first  : nom de la page
+		// it->second : struc de type LienPage
+		// it->second.NbLiens : nombre d'accès à la page
+		
+		cout << it->second << " (" << it->first << " hits)" << endl;
+	}
 } //----- Fin de AfficherPlusConsultes
 
 bool Graphe::Exporter(const string & nomFichier) const
@@ -209,7 +235,8 @@ bool Graphe::Exporter(const string & nomFichier) const
 	}
 	for(auto jt = index.begin(); jt != index.end(); ++jt)
 	{
-		fs << liensPages.at(jt->second);
+		if(liensPages.count(jt->second))
+			fs << liensPages.at(jt->second);
 	}
 	fs << "}";
 	fs.close();
