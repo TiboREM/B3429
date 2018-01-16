@@ -17,6 +17,7 @@
 //--------------------------------------------------- Interfaces utilisées
 #include <string>
 #include <unordered_map>
+
 //------------------------------------------------------------------ Types
 struct LienPage
 {
@@ -105,7 +106,8 @@ public:
 //------------------------------------------------------------------ PRIVE
 private:
 //-------------------------------------------------------- Méthodes privés
-        void ajouterLien(const string & pageArrivee,const string & pageDepart = "");
+	void ajouterLien(const string & pageArrivee,
+										const string & pageDepart = "");
     // Mode d'emploi : Ajoute au Graphe un lien vers la page pageArrivee.
     //		Si une page pageDepart non vide est renseignée alors la source
     //		du lien est renseignée comme étant pageDepart. Si l'une des

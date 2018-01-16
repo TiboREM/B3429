@@ -1,62 +1,86 @@
-#include <iostream>
-#include <cstring>
-
 using namespace std;
 
+#include <iostream>
+#include <cstring>
+#include "Graphe.h"
+
 int main(int argc, char** argv) {
-    if(argc == 0){
-        cerr<<"nom fichier non valide"<<endl;
+#ifdef TEST_TIB
+    cout << "Nombre d'arguments = " << argc << endl;
+    for(int i=0;i<argc;i++){
+        cout << "Argument n°" << i << "  = " << argv[i]<< endl;
+	}
+#endif
+    if(argc == 1){
+        cerr<<"Aucun nom de fichier saisi."<<endl;
+        return 1;
     }
+    
     bool flagE = false;
     bool flagT = false;
     bool flagG = false;
     string logFile;
     string graphFile;
-    int hour;
-    cout<<argc<<endl;
-    for(int i=1;i<argc;i++){
-        cout<<i<<" "<<argv[i]<<endl;
+    unsigned int hour = 24;
+    
+    //Options
+    for(int i=1;i<argc-1;i++){
         if(strcmp(argv[i],"-e")==0){
-            flagE=true;
+        	if(!flagE)
+            	flagE=true;
+            else
+            {
+            	cerr << "Vous ne pouvez pas mettre l'option -e en double."
+		    													<< endl;
+		    	return 1;
+		    }
         }
         else if(strcmp(argv[i],"-g")==0){
-            flagG=true;
-            ++i;
-            graphFile = string(argv[i]);
-
+        	if(!flagG)
+        	{
+		        flagG=true;
+		        graphFile = string(argv[++i]);
+		    }
+		    else
+		    {
+		    	cerr << "Vous ne pouvez pas mettre l'option -g en double."
+		    													<< endl;
+		    	return 1;
+		    }
         }
         else if(strcmp(argv[i],"-t")==0){
-            flagT=true;
-            ++i;
-            hour = atoi(argv[i]);
-        }
-        else if(argv[i][0]=='-'){
-            cerr<<"unrecognised argument"<<endl;
+        	if(!flagT)
+        	{
+		        flagT=true;
+		        hour = atoi(argv[++i]);
+		    }
+		    else
+		    {
+		    	cerr << "Vous ne pouvez pas mettre l'option -t en double."
+		    													<< endl;
+		    	return 1;
+		    }
         }
         else{
-            logFile = string(argv[i]);
+            cerr << "L'argument " << argv[i] << " est inconnu."<< endl;
+        	return 1;
         }
     }
-    cout<<"flagE="<<flagE<<endl;
-    cout<<"flagT="<<flagT<<endl;
-    cout<<"flagG="<<flagG<<endl;
-    cout<<"logfile="<<logFile<<endl;
-    cout<<"graphFile="<<graphFile<<endl;
-    cout<<"hour="<<hour<<endl;
+    
+    //nom de fichier .log
+    logFile = string(argv[argc-1]);
+    
+#ifdef TEST_TIB
+    cout << "flagE=" << flagE << endl;
+    cout << "flagT=" << flagT << endl;
+    cout << "flagG=" << flagG << endl;
+    cout << "logfile=" << logFile << endl;
+    cout << "graphFile=" << graphFile << endl;
+    cout << "hour=" << hour << endl;
+#endif
 
+    Graphe monGraphe(logFile, flagE, flagG, hour);
     if(flagG){ //si option graphe activé
-        if (flagE && flagT==0){//option g et e
-            cout<<"option g et e active"<<endl;
-        }
-        if (flagT && flagE ==0 ){
-            //option g;e et ;t avec hour
-            cout<<"option g et t  active"<<endl;
-        }
-        cout<<"option g active"<<endl;
-
+		monGraphe.Exporter(graphFile);
     }
-
-
-
-
 }
