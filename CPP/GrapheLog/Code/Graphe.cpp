@@ -37,7 +37,7 @@ Graphe::Graphe (const string & nomFichier, const bool optionE,
 	if(indexPoint != nomFichier.find_first_of('.')  ||
 							nomFichier.substr(indexPoint).compare(".log"))
 	{
-		cerr << "GRAPHE::GRAPHE : Le nom de fichier " << nomFichier <<
+		cerr << "Le nom de fichier des logs " << nomFichier <<
 										" n'est pas conforme." << endl;
 		return;
 	}
@@ -52,7 +52,7 @@ Graphe::Graphe (const string & nomFichier, const bool optionE,
 	ifstream fichier(nomFichier, ios::in);
 	if(!fichier)
 	{
-		cerr << "GRAPHE::GRAPHE : Le fichier " << nomFichier <<
+		cerr << "Le fichier des logs " << nomFichier <<
 					" n'existe pas ou ne peut pas être ouvert." << endl;
 		return;
 	}
@@ -138,13 +138,20 @@ Graphe::Graphe (const string & nomFichier, const bool optionE,
 												indexDebutPageDepart + 1);
 			pageDepart = ligne.substr(indexDebutPageDepart + 1,
 						indexFinPageDepart - indexDebutPageDepart - 1);
-			//on nettoie les intranet-if.insa-lyon.fr
+			//on nettoie LOCAL_HOST
 			size_t indexInsa = pageDepart.find("://"  + LOCAL_HOST);					
 			if(indexInsa < 6)
 			{
 				pageDepart = pageDepart.substr(indexInsa + 3 +
 													LOCAL_HOST.length());
 			}
+			//on nettoie les ://www.google.fr/url?
+			size_t indexGoogle = pageDepart.find("://www.google.fr/url?");					
+			if(indexGoogle < 6)
+			{
+				pageDepart = pageDepart.substr(0,indexGoogle + 21);
+			}
+			
 #ifdef TEST_FLO
 			cout << "    Option avec page de départ : " << pageDepart <<
 																	endl;
