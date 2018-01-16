@@ -22,7 +22,7 @@
 struct LienPage
 {
 	// ID de la page concernée
-	const unsigned int Id;
+	unsigned int Id;
 	
 	// Nombre d'accès vers cette page
 	unsigned int NbLiens;
@@ -42,13 +42,6 @@ struct LienPage
 				<< " [label=\"" << element.second << "\"]" << endl;
 		return o;
 	}
-	
-	// Constructeur : initialisation du nombre de liens à 0.
-	// i : Id de la page concernée
-	// 
-	LienPage (const unsigned int i) : Id(i), NbLiens(0) {}
-	
-	LienPage() : Id(0), NbLiens(0) {}
 };
 
 //------------------------------------------------------------------------

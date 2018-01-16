@@ -271,7 +271,9 @@ void Graphe::ajouterLien(const string & pageArrivee,
 {
 	if(!index.count(pageArrivee))
 	{
-		index[pageArrivee] = maxIndex++;
+		index[pageArrivee] = maxIndex;
+		liensPages[maxIndex].Id = maxIndex;
+		++maxIndex;
 	}
 	
 	unsigned int indexPageArrivee = index[pageArrivee];

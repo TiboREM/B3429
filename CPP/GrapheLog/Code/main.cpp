@@ -80,6 +80,9 @@ int main(int argc, char** argv) {
 #endif
 
     Graphe monGraphe(logFile, flagE, flagG, hour);
+#ifdef TEST_FLO
+	monGraphe.AfficheTEST_FLO();
+#endif
     if(flagG){ //si option graphe activé
 		monGraphe.Exporter(graphFile);
     }
