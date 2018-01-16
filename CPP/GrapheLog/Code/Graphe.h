@@ -17,11 +17,12 @@
 //--------------------------------------------------- Interfaces utilisées
 #include <string>
 #include <unordered_map>
+
 //------------------------------------------------------------------ Types
 struct LienPage
 {
 	// ID de la page concernée
-	const unsigned int Id;
+	unsigned int Id;
 	
 	// Nombre d'accès vers cette page
 	unsigned int NbLiens;
@@ -41,13 +42,6 @@ struct LienPage
 				<< " [label=\"" << element.second << "\"]" << endl;
 		return o;
 	}
-	
-	// Constructeur : initialisation du nombre de liens à 0.
-	// i : Id de la page concernée
-	// 
-	LienPage (const unsigned int i) : Id(i), NbLiens(0) {}
-	
-	LienPage() : Id(0), NbLiens(0) {}
 };
 
 //------------------------------------------------------------------------
@@ -105,7 +99,8 @@ public:
 //------------------------------------------------------------------ PRIVE
 private:
 //-------------------------------------------------------- Méthodes privés
-        void ajouterLien(const string & pageArrivee,const string & pageDepart = "");
+	void ajouterLien(const string & pageArrivee,
+										const string & pageDepart = "");
     // Mode d'emploi : Ajoute au Graphe un lien vers la page pageArrivee.
     //		Si une page pageDepart non vide est renseignée alors la source
     //		du lien est renseignée comme étant pageDepart. Si l'une des
@@ -116,5 +111,6 @@ private:
 	unordered_map<string, unsigned int> index;
 	unsigned int maxIndex = 0;
 	unordered_map<unsigned int, LienPage> liensPages;
+	const string LOCAL_HOST = "intranet-if.insa-lyon.fr";
 };
 #endif // Graphe_H

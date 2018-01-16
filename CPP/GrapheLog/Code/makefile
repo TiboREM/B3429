@@ -7,7 +7,7 @@ EDLFLAGS =
 
 # compilation
 COMP = g++ -c
-COMPFLAGS_DEFAUT = -ansi -g -pedantic -Wall -std=c++11 -DMAP #-DTEST_FLO
+COMPFLAGS_DEFAUT = -ansi -g -pedantic -Wall -std=c++11 -DTEST_FLO #-DMAP -DTEST_TIB
 COMPFLAGS_PERSO =
 COMPFLAGS = $(COMPFLAGS_DEFAUT) $(COMPFLAGS_PERSO)
 
@@ -32,12 +32,10 @@ main.o : main.cpp
 	@ echo "compilation pour $@"
 	@ $(COMP)  $(COMPFLAGS) $<
 
-.PHONY: clean mrproper
+.PHONY: clean
 
 clean :
-	@ echo "suppression des fichiers .o"
-	@ rm -f *.o
-
-mrproper : clean
 	@ echo "suppression de l'éxecutable $(EXE)"
 	@ rm -f $(EXE)
+	@ echo "suppression des fichiers .o"
+	@ rm -f *.o
