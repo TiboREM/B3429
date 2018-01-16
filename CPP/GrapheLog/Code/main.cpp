@@ -14,6 +14,9 @@ using namespace std;
 #include "Graphe.h"
 
 int main (){
-	Graphe("test.log");
+	Graphe monGraphe("test.log",true,true,11);
+#ifdef TEST_FLO
+	monGraphe.AfficheTEST_FLO();
+#endif
 	return 0;
 }

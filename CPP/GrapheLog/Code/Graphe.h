@@ -40,7 +40,7 @@ class Graphe
 public:
 //-------------------------------------------- Constructeurs - destructeur
 	Graphe (const string & nomFichier, const bool optionE = false, 
-			const bool optionG = false, const unsigned int heure = 24);
+		const bool optionG = false, const unsigned int optionHeure = 24);
     // Mode d'emploi : Construit un objet Graphe à partir du fichier qui
     //		se situe à l'adresse nomFichier. Les paramêtres optionE et
     //		optionG indiquent respectivement si l'option e et g est
@@ -70,6 +70,12 @@ public:
     // Contrat : Le paramêtre nomFichier est l'adresse abolue ou relative
     //		d'un fichier .dot.
 
+#ifdef TEST_FLO
+	void AfficheTEST_FLO() const;
+    // Mode d'emploi : Affiche l'objet dans la console.
+    // Contrat : Le aucun.
+#endif
+
 //------------------------------------------------------------------ PRIVE
 private:
 //-------------------------------------------------------- Méthodes privés
@@ -83,7 +89,7 @@ private:
     // Contrat : Le paramêtre page Arrivee est non vide.
 //------------------------------------------------------- Attributs privés
 	unordered_map<string, unsigned int> index;
+	unsigned int maxIndex = 0;
 	unordered_map<unsigned int, LienPage> liensPages;
 };
-
 #endif // Graphe_H
