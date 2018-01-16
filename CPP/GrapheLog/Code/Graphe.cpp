@@ -137,6 +137,13 @@ Graphe::Graphe (const string & nomFichier, const bool optionE,
 												indexDebutPageDepart + 1);
 			pageDepart = ligne.substr(indexDebutPageDepart + 1,
 						indexFinPageDepart - indexDebutPageDepart - 1);
+			//on nettoie les intranet-if.insa-lyon.fr
+			size_t indexInsa = pageDepart.find("://"  + LOCAL_HOST);					
+			if(indexInsa < 6)
+			{
+				pageDepart = pageDepart.substr(indexInsa + 3 +
+													LOCAL_HOST.length());
+			}
 #ifdef TEST_FLO
 			cout << "    Option avec page de départ : " << pageDepart <<
 																	endl;

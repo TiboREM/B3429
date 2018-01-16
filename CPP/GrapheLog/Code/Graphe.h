@@ -117,5 +117,6 @@ private:
 	unordered_map<string, unsigned int> index;
 	unsigned int maxIndex = 0;
 	unordered_map<unsigned int, LienPage> liensPages;
+	const string LOCAL_HOST = "intranet-if.insa-lyon.fr";
 };
 #endif // Graphe_H
