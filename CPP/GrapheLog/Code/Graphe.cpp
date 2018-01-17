@@ -191,26 +191,32 @@ void Graphe::AfficherPlusConsultes() const
 	{
 		string nomPage = it.first;
 		LienPage lienPage;
+		
+		unsigned int nbLiens = 0;
 		if(liensPages.count(it.second))
+		{
 			lienPage = liensPages.at(it.second);
-		unsigned int nbLiens = 0;//lienPage.NbLiens;
+			nbLiens = lienPage.NbLiens;
+		}
 		
-		cout << "nbLiens : " << nbLiens << " ; nomPage : " << nomPage << endl;
-		
-		//cout << nomPage << " " << nbLiens << "---" << it.second << endl;
-		
-		classement.insert({nbLiens, nomPage});
+		classement.insert(pair<unsigned int,string>(nbLiens, nomPage));
 
 	}
+
+	unsigned int nbPlusConsultes = 10;
 	
-	cout << "Liste des pages les plus visitées " << endl;
+	unsigned int i = 0;
 	
-	for(auto it = classement.end();	it != classement.begin(); --it)
+	for(auto it = --classement.end(); it != --classement.begin(); --it)
 	{
+	
 		// it->first  : nom de la page
 		// it->second : struc de type LienPage
 		// it->second.NbLiens : nombre d'accès à la page
-		cout << "ee" << " (" << it->first << " hits)" << endl;
+		cout << (string) it->second << " (" << it->first << " hits)" << endl;
+		
+		if(++i == nbPlusConsultes)
+			break;
 	}
 } //----- Fin de AfficherPlusConsultes
 
@@ -289,8 +295,9 @@ void Graphe::ajouterLien(const string & pageArrivee,
 	}
 	
 	unsigned int indexPageArrivee = index[pageArrivee];
-	LienPage * lienPage = &liensPages[indexPageArrivee];
-	++lienPage->NbLiens;
+	
+	LienPage & lienPage = liensPages[indexPageArrivee];
+	++lienPage.NbLiens;
 	
 	if(!pageDepart.empty())
 	{
@@ -300,13 +307,13 @@ void Graphe::ajouterLien(const string & pageArrivee,
 		}
 		unsigned int indexPageDepart = index[pageDepart];
 		
-		if(!lienPage->Liens.count(indexPageDepart))
+		if(!lienPage.Liens.count(indexPageDepart))
 		{
-			lienPage->Liens[indexPageDepart] = 1;
+			lienPage.Liens[indexPageDepart] = 1;
 		}
 		else
 		{
-			++lienPage->Liens[indexPageDepart];
+			++lienPage.Liens[indexPageDepart];
 		}
 	}
 } //----- Fin de ajouterLien
