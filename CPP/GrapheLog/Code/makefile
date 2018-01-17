@@ -7,7 +7,7 @@ EDLFLAGS =
 
 # compilation
 COMP = g++ -c
-COMPFLAGS_DEFAUT = -ansi -g -pedantic -Wall -std=c++11 -DTEST_FLO #-DMAP -DTEST_TIB
+COMPFLAGS_DEFAUT = -ansi -g -pedantic -Wall -std=c++11 #-DTEST_FLO #-DMAP -DTEST_TIB
 COMPFLAGS_PERSO =
 COMPFLAGS = $(COMPFLAGS_DEFAUT) $(COMPFLAGS_PERSO)
 

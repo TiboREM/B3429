@@ -183,9 +183,12 @@ void Graphe::AfficherPlusConsultes() const
 	for(auto &it : index)
 	{
 		string nomPage = it.first;
+		LienPage lienPage;
 		if(liensPages.count(it.second))
-			LienPage lienPage = liensPages.at(it.second);
+			lienPage = liensPages.at(it.second);
 		unsigned int nbLiens = 0;//lienPage.NbLiens;
+		
+		cout << "nbLiens : " << nbLiens << " ; nomPage : " << nomPage << endl;
 		
 		//cout << nomPage << " " << nbLiens << "---" << it.second << endl;
 		
@@ -193,14 +196,14 @@ void Graphe::AfficherPlusConsultes() const
 
 	}
 	
+	cout << "Liste des pages les plus visitées " << endl;
 	
 	for(auto it = classement.end();	it != classement.begin(); --it)
 	{
 		// it->first  : nom de la page
 		// it->second : struc de type LienPage
 		// it->second.NbLiens : nombre d'accès à la page
-		
-		cout << it->second << " (" << it->first << " hits)" << endl;
+		cout << "ee" << " (" << it->first << " hits)" << endl;
 	}
 } //----- Fin de AfficherPlusConsultes
 

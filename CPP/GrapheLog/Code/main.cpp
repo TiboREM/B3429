@@ -86,4 +86,6 @@ int main(int argc, char** argv) {
     if(flagG){ //si option graphe activé
 		monGraphe.Exporter(graphFile);
     }
+    
+    monGraphe.AfficherPlusConsultes();
 }
