@@ -35,7 +35,7 @@ main.o : main.cpp
 .PHONY: clean
 
 clean :
-	@ echo "suppression de l'éxecutable $(EXE)"
+	@ echo "suppression de l'exécutable $(EXE)"
 	@ rm -f $(EXE)
 	@ echo "suppression des fichiers .o"
 	@ rm -f *.o
