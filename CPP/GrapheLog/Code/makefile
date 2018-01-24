@@ -1,5 +1,5 @@
 # nom de l'executable produit
-EXE = demo
+EXE = analog
 
 # édition des liens
 EDL = g++ -o
@@ -7,8 +7,8 @@ EDLFLAGS =
 
 # compilation
 COMP = g++ -c
-COMPFLAGS_DEFAUT = -ansi -g -pedantic -Wall -std=c++11 #-DTEST_FLO #-DMAP -DTEST_TIB
-COMPFLAGS_PERSO =
+COMPFLAGS_DEFAUT = -ansi -g -pedantic -Wall -std=c++11
+COMPFLAGS_PERSO = #-DTEST_FLO #-DMAP -DTEST_TIB
 COMPFLAGS = $(COMPFLAGS_DEFAUT) $(COMPFLAGS_PERSO)
 
 # fichiers
