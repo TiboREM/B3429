@@ -33,8 +33,11 @@ Graphe::Graphe (const string & nomFichier, const bool optionE,
 #endif
 	
 	//Vérifications
-	unsigned int indexPoint = nomFichier.find_last_of('.');
-	if(indexPoint != nomFichier.find_first_of('.')  ||
+	size_t indexSlash = nomFichier.find_last_of('/');
+    if(indexSlash == string::npos)
+        indexSlash = 0;
+	size_t indexPoint = nomFichier.find_last_of('.');
+	if(indexPoint != nomFichier.find_first_of('.',indexSlash)  ||
 							nomFichier.substr(indexPoint).compare(".log"))
 	{
 		cerr << "Le nom de fichier des logs " << nomFichier <<
@@ -203,7 +206,7 @@ void Graphe::AfficherPlusConsultes() const
 
 	}
 
-	unsigned int nbPlusConsultes = 10;
+	const unsigned int nbPlusConsultes = 10;
 	
 	unsigned int i = 0;
 	

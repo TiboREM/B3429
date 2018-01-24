@@ -3,6 +3,7 @@ using namespace std;
 #include <iostream>
 #include <cstring>
 #include "Graphe.h"
+#include <sys/stat.h>
 
 int main(int argc, char** argv) {
 #ifdef TEST_TIB
@@ -69,7 +70,25 @@ int main(int argc, char** argv) {
     
     //nom de fichier .log
     logFile = string(argv[argc-1]);
-    
+    size_t indexSlash = logFile.find_last_of('/');
+    if(indexSlash == string::npos)
+        indexSlash = 0;
+    size_t indexPoint = logFile.find_last_of('.');
+    if(indexPoint != logFile.find_first_of('.',indexSlash)  ||
+                            logFile.substr(indexPoint).compare(".log"))
+    {
+        cerr << "Le nom de fichier des logs " << logFile <<
+                                        " n'est pas conforme." << endl;
+        return 1;
+    }
+    struct stat buffer;   
+    if(!(stat (logFile.c_str(), &buffer) == 0))
+    {
+        cerr << "Le fichier des logs " << logFile <<
+                                        " n'existe pas." << endl;
+        return 1;
+    }
+
 #ifdef TEST_TIB
     cout << "flagE=" << flagE << endl;
     cout << "flagT=" << flagT << endl;

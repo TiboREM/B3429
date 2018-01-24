@@ -1,8 +1,6 @@
 digraph {
-node1 [label="/temps/4IF15.html"];
-node3 [label="http://www.google.fr/url?"];
-node2 [label="/temps/"];
-node0 [label="/temps/4IF16.html"];
-node3 -> node2 [label="1"]
-node1 -> node0 [label="2"]
+node1 [label="/page1.html"];
+node0 [label="/page2.html"];
+node0 -> node0 [label="1"]
+node1 -> node0 [label="1"]
 }
