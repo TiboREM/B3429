@@ -38,8 +38,14 @@ struct LienPage
 	friend ostream& operator << (ostream& o, const LienPage& lp)
 	{
 		for (pair<unsigned int, unsigned int> element : lp.Liens)
+		{
 			o << "node" << element.first << " -> node" << lp.Id 
 				<< " [label=\"" << element.second << "\"]" << endl;
+#ifdef TEST_FLO
+		cout << "$ node" << element.first << " -> node" << lp.Id 
+				<< " [label=\"" << element.second << "\"]" << endl;
+#endif
+		}
 		return o;
 	}
 };

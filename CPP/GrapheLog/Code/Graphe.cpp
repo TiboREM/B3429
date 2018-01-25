@@ -31,6 +31,9 @@ Graphe::Graphe (const string & nomFichier, const bool optionE,
 #ifdef MAP
     cout << "Appel au constructeur de <Graphe>" << endl;
 #endif
+#ifdef TEST_FLO
+	cout << "---- CREATION D'UN GRAPHE ----" << endl;
+#endif
 	
 	//Vérifications
 	size_t indexSlash = nomFichier.find_last_of('/');
@@ -171,6 +174,9 @@ Graphe::Graphe (const string & nomFichier, const bool optionE,
 #endif
 		}
 	}
+#ifdef TEST_FLO
+	cout << "------------------------------" << endl;
+#endif
 } //----- Fin de Graphe
 
 Graphe::~Graphe ( )
@@ -226,6 +232,9 @@ void Graphe::AfficherPlusConsultes() const
 bool Graphe::Exporter(const string & nomFichier) const
 // Algorithme : aucun
 {
+#ifdef TEST_FLO
+	cout << "---- EXPORTATION ----" << endl;
+#endif
 	//Vérifications
 	size_t indexPoint = nomFichier.find_last_of('.');
 	if(indexPoint != nomFichier.find_first_of('.')  ||
@@ -233,10 +242,13 @@ bool Graphe::Exporter(const string & nomFichier) const
 	{
 		cerr << "GRAPHE::EXPORTER : Le nom de fichier " << nomFichier <<
 										" n'est pas conforme." << endl;
+#ifdef TEST_FLO
+		cout << "---------------------" << endl;
+#endif
 		return false;
 	}
 	
-	//Exportation
+	//Ouverture du flux
 	fstream fs;
 	fs.open(nomFichier, fstream::trunc | fstream::out);
 	if(!fs.is_open())
@@ -244,23 +256,49 @@ bool Graphe::Exporter(const string & nomFichier) const
 		fs.close();
 		cerr << "GRAPHE::EXPORTER : Le fichier " << nomFichier <<
 									" ne peut pas être ouvert." << endl;
+#ifdef TEST_FLO
+		cout << "---------------------" << endl;
+#endif
 		return false;
 	}
 	
 	//Exportation
 	fs << "digraph {" << endl;
+#ifdef TEST_FLO
+	cout << "$ digraph {" << endl;
+	cout << endl;
+	cout << "Déclaration des nodes" << endl;
+#endif
 	for(auto it = index.begin(); it != index.end(); ++it)
 	{
 		fs << "node" << it->second << " [label=\"" << it->first << "\"];"
 																<< endl;
+#ifdef TEST_FLO
+		cout << "$ node" << it->second << " [label=\"" << it->first
+														<< "\"];" << endl;
+#endif
 	}
+#ifdef TEST_FLO
+	cout << endl;
+#endif
 	for(auto jt = index.begin(); jt != index.end(); ++jt)
 	{
-		if(liensPages.count(jt->second))
-			fs << liensPages.at(jt->second);
+#ifdef TEST_FLO
+		cout << "Liens vers node" << jt->second << endl;
+#endif
+		fs << liensPages.at(jt->second);
+#ifdef TEST_FLO
+		cout << endl;
+#endif
 	}
 	fs << "}";
+#ifdef TEST_FLO
+	cout << "$ }" << endl;
+#endif
 	fs.close();
+#ifdef TEST_FLO
+	cout << "---------------------" << endl;
+#endif
 	return true;
 } //----- Fin de Exporter
 
@@ -306,7 +344,9 @@ void Graphe::ajouterLien(const string & pageArrivee,
 	{
 		if(!index.count(pageDepart))
 		{
-			index[pageDepart] = maxIndex++;
+			index[pageDepart] = maxIndex;
+			liensPages[maxIndex].Id = maxIndex;
+			++maxIndex;
 		}
 		unsigned int indexPageDepart = index[pageDepart];
 		

@@ -103,7 +103,10 @@ int main(int argc, char** argv) {
 	monGraphe.AfficheTEST_FLO();
 #endif
     if(flagG){ //si option graphe activé
-		monGraphe.Exporter(graphFile);
+		if(!monGraphe.Exporter(graphFile))
+        {
+            return 1;
+        }
     }
     
     monGraphe.AfficherPlusConsultes();
