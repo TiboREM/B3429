@@ -216,7 +216,16 @@ void Graphe::AfficherPlusConsultes() const
 	
 	unsigned int i = 0;
 	
-	for(auto it = --classement.end(); it != --classement.begin(); --it)
+#ifdef TEST_FLO
+	cout << "---- CLASSEMENT DES PLUS CONSULTES ----" << endl;
+	for(auto it = classement.rbegin(); it != classement.rend(); ++it)
+	{
+		cout << (string) it->second << " (" << it->first << " hits)" << endl;
+	}
+	cout << "---------------------------------------" << endl;
+#endif
+
+	for(auto it = classement.rbegin(); it != classement.rend(); ++it)
 	{
 	
 		// it->first  : nom de la page
