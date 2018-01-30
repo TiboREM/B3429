@@ -1,1 +1,1 @@
-make && ./analog -t 12 -g test.dot test.log && dot -Tpng -o test.png test.dot
+make && ./analog -e -g test.dot test.log && dot -Tpng -o test.png test.dot

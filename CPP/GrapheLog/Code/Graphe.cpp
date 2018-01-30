@@ -33,6 +33,10 @@ Graphe::Graphe (const string & nomFichier, const bool optionE,
 #endif
 #ifdef TEST_FLO
 	cout << "---- CREATION D'UN GRAPHE ----" << endl;
+	cout << "nomFichier = " << nomFichier << endl;
+	cout << "optionE = " << (optionE?"true":"false") << endl;
+	cout << "optionG = " << (optionG?"true":"false") << endl;
+	cout << "optionHeure = " << optionHeure << endl;
 #endif
 	
 	//Vérifications
@@ -116,7 +120,7 @@ Graphe::Graphe (const string & nomFichier, const bool optionE,
 #endif
 				if(extension == ".css"  ||  extension == ".js"  ||
 						extension == ".jpeg"  ||  extension == ".gif"  ||
-						extension == "jpg")
+						extension == ".jpg")
 				{
 					aEnregistrer = false;
 #ifdef TEST_FLO
